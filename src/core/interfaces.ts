@@ -4,6 +4,8 @@ export interface MethodDetails {
 
 export interface PropertyDetails {
     name: string;
+    type: string;
+    tracked: boolean;
 }
 
 export interface HeritageClause {

@@ -14,18 +14,20 @@ export function getAst(tsConfigPath: string, sourceFilesPaths?: string[]) {
     return ast;
 }
 
-export function parseClasses(classDeclaration: SimpleAST.ClassDeclaration) {
+export function parseClasses(classDeclaration: SimpleAST.ClassDeclaration, 
+    trackedClasses: String[]) {
     
     const className = classDeclaration.getSymbol()!.getName();
     const propertyDeclarations = classDeclaration.getProperties();
+    //console.log(propertyDeclarations);
     const methodDeclarations = classDeclaration.getMethods();
 
     const properties = propertyDeclarations.map(property => {
+        
         const sym = property.getSymbol();
         if (sym) {
-            return {
-                name: sym.getName()
-            };
+           var type = property.getType().getText();
+           return {name: sym.getName(), type: type, tracked:(trackedClasses.indexOf(type) > -1)}
         }
     }).filter((p) => p !== undefined) as PropertyDetails[];
 

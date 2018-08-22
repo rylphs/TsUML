@@ -7,7 +7,13 @@ import { templates }from "./templates";
 import { download } from "./io";
 
 export function emitSingleClass(name: string, properties: PropertyDetails[], methods: MethodDetails[]) {
+    console.log("emitingsingleclass: " + name);
+    console.log(properties);
     return templates.class(name, properties, methods);
+}
+
+export function emitAssociations(name: string, properties: PropertyDetails[]) {
+    return templates.associations(name, properties);
 }
 
 export function emitSingleInterface(name: string, properties: PropertyDetails[], methods: MethodDetails[]) {
